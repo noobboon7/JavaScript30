@@ -97,25 +97,27 @@
   </div>
 
   <script>
-    let end = 0;
-    const checkBoxes = [...document.querySelectorAll(".inbox .item input[type='checkbox']")];
+    const checkBoxes = document.querySelectorAll(".inbox [type='checkbox']");
+    let lastChecked = null,
+      inBetween = false; // switches if the checkboxes are in between 
 
-    console.log(checkBoxes);
-    document.addEventListener("keydown", (e) => {
-      if (e.keyCode === 16 && e.shiftKey) {
-        // If the user is holding down the Shift key and they click a checkbox,
-        // check all the checkboxes between the two clicked checkboxes.
-        const start = checkBoxes.indexOf(e.target);
-        document.addEventListener("click", (e) => {
-          if (e.target.tagName.toLowerCase() === "input") {
-            end = checkBoxes.indexOf(e.target);
-            for (let i = start; i <= end; i++) {
-              checkBoxes[i].checked = true;
-            }
+    checkBoxes.forEach(checkbox => {
+      checkbox.addEventListener("click", handleCheck);
+    });
+
+    function handleCheck(e) {
+      if (e.shiftKey && this.checked) {
+        checkBoxes.forEach(checkbox => {
+          if (checkbox === this || checkbox === lastChecked) {
+            inBetween = !inBetween;
+          }
+          if (inBetween) {
+            checkbox.checked = true;
           }
         });
       }
-    });
+      lastChecked = this
+    }
   </script>
 </body>
 
