@@ -99,24 +99,32 @@
   <script>
     const checkBoxes = document.querySelectorAll(".inbox [type='checkbox']");
     let lastChecked = null,
-      inBetween = false; // switches if the checkboxes are in between 
+      inBetween = false; 
 
+    //add click event listener to all checkboxes
     checkBoxes.forEach(checkbox => {
       checkbox.addEventListener("click", handleCheck);
     });
 
     function handleCheck(e) {
+      //if shift key is held down and the current checkbox is clicked
+      // this need to be the first thing that happens, before reassigning lastChecked
       if (e.shiftKey && this.checked) {
         checkBoxes.forEach(checkbox => {
+          // switch the inBetween flag if checkbox is the last checkbox or the current checkbox
+          // this way we can check all the boxes between the two checkboxes
           if (checkbox === this || checkbox === lastChecked) {
             inBetween = !inBetween;
           }
+          // will only run if the inBetween flag is true
           if (inBetween) {
             checkbox.checked = true;
           }
         });
       }
+      // last checked is set to the currently clicked checkbox
       lastChecked = this
+      // console.log([...checkBoxes].indexOf(this));
     }
   </script>
 </body>
