@@ -7,6 +7,16 @@
 </head>
 <body>
 <script>
+  const keysPressed = [],
+  secretCode = "corn";
+
+  window.addEventListener("keyup", (e) => {
+    keysPressed.push(e.key);
+    keysPressed.splice(0 , keysPressed.length - secretCode.length);
+    if (keysPressed.join("").includes(secretCode)) {
+      cornify_add();
+    }
+  });
 </script>
 </body>
 </html>
