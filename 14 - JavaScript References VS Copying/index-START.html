@@ -8,17 +8,34 @@
 
   <script>
     // start with strings, numbers and booleans
+    let myString = 'hello', myStr2 = myString;
+    console.log(myString, myStr2);
+    myString = "world";
+    console.log(myString, myStr2);
+
+
+    let myNum = 5, myNum2 = myNum;
+    console.log(myNum, myNum2);
+    myNum = 10;
+    console.log(myNum, myNum2);
+
+    let myBool = true, myBool2 = myBool;
+    console.log(myBool, myBool2);
+    myBool = false;
+    console.log(myBool, myBool2);
+
 
     // Let's say we have an array
     const players = ['Wes', 'Sarah', 'Ryan', 'Poppy'];
 
     // and we want to make a copy of it.
-
+    const team = players;
     // You might think we can just do something like this:
 
     // however what happens when we update that array?
-
+    team[0] = "jerry"
     // now here is the problem!
+    console.log(players, team)
 
     // oh no - we have edited the original array too!
 
@@ -27,13 +44,14 @@
     // So, how do we fix this? We take a copy instead!
 
     // one way
-
+    const team4 = players.slice()
     // or create a new array and concat the old one in
-
+    const team2 = [].concat(players);
     // or use the new ES6 Spread
-
+    const team3 = [...players];
     // now when we update it, the original one isn't changed
-
+    players[1] = 'elon';
+    console.log(players, team2, team3);
     // The same thing goes for objects, let's say we have a person object
 
     // with Objects
@@ -43,13 +61,16 @@
     };
 
     // and think we make a copy:
-
+    const captain = person;
+    console.log(captain);
     // how do we take a copy instead?
-
+    const cap2 = Object.assign({}, person, { number: 99, age: 20 });
     // We will hopefully soon see the object ...spread
-
+    const cap3 = { ...person, number: 99, age: 20 };
     // Things to note - this is only 1 level deep - both for Arrays and Objects. lodash has a cloneDeep method, but you should think twice before using it.
+    console.log(cap2, cap3);
 
+    const cap4 = JSON.parse(JSON.stringify(person));
   </script>
 
 </body>
