@@ -67,6 +67,8 @@
       console.log(position.coords)
       speedometer.textContent = speed || 0
       arrow.style.transform = `rotate(${heading}deg)`
+    }, (err)=>{
+      console.error("Allow location, for compass to work", err.message);
     })
   </script>
 </body>
