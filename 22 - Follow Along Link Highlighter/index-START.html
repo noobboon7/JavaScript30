@@ -39,16 +39,21 @@
     document.body.appendChild(highLight)
 
     triggers.forEach(link => link.addEventListener('mouseover', highlightLink));
+    // optional - add a mouseout event to remove the highlight
+    // triggers.forEach(link => link.addEventListener('mouseout', () => highLight.classList.remove('highlight') ));
 
     function highlightLink(e) {
+      // highLight.classList.add('highlight')
       const { bottom, height, left, right, top, width, x, y } = this.getBoundingClientRect()
       const { scrollX, scrollY } = window
       const xPos = left + scrollX,
-            yPos = top + scrollY
-            
+        yPos = top + scrollY
+
       highLight.style.width = `${width}px`
       highLight.style.height = `${height}px`
       highLight.style.transform = `translate(${xPos}px, ${yPos}px)`
+
+
     }
   </script>
 </body>
