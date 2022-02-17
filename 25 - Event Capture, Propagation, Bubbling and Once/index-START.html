@@ -42,7 +42,29 @@
 
 <button></button>
 <script>
+  const divs = document.querySelectorAll('div');
+  const btn = document.querySelector('button');
 
+  function logText(e) {
+    console.log(this.classList.value);
+    // stop bubbling up the DOM
+    // e.stopPropagation();
+  }
+
+  divs.forEach(div => div.addEventListener('click', logText,{
+    // by default, capture is false
+    // capture will fire the event on the outer most element first up to the one clicked
+    capture: true,
+  }));
+
+  // this is useful when you want to a user from clicking on a button more than once
+  btn.addEventListener('click', () => {
+    console.log("button clicked");
+  }, {
+    capture: true,
+    // once will unbind the event listener after the first time it is called
+    once: true
+  });
 </script>
 </body>
 </html>
